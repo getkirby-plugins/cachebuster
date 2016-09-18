@@ -6,7 +6,7 @@ use F;
 
 /**
  * Kirby Cachebuster JS Component
- * 
+ *
  * @author Lukas Bestle <lukas@getkirby.com>
  * @license MIT
  * @link https://getkirby.com
@@ -15,7 +15,7 @@ class JS extends \Kirby\Component\JS {
 
   /**
    * Builds the html script tag for the given javascript file
-   * 
+   *
    * @param string $src
    * @param boolean async
    * @return string
@@ -32,7 +32,7 @@ class JS extends \Kirby\Component\JS {
 
     if(file_exists($file)) {
       $mod = f::modified($file);
-      $src = dirname($src) . '/' . f::name($src) . '.' . $mod . '.js';
+      $src = dirname($src) . '/' . f::name($src) . '.' . $mod . strstr($file, '.js');
     }
 
     return parent::tag($src, $async);

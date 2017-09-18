@@ -32,7 +32,12 @@ class CSS extends \Kirby\Component\CSS {
 
     if(file_exists($file)) {
       $mod = f::modified($file);
-      $url = dirname($url) . '/' . f::name($url) . '.' . $mod . '.css';
+      if(\c::get('cachebuster.querystring.enable')) {
+        $url .= '?v=' . $mod;
+      }
+      else {
+        $url = dirname($url) . '/' . f::name($url) . '.' . $mod . '.css';
+      }
     }
 
     return parent::tag($url, $media);

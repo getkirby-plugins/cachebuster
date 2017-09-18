@@ -32,7 +32,12 @@ class JS extends \Kirby\Component\JS {
 
     if(file_exists($file)) {
       $mod = f::modified($file);
-      $src = dirname($src) . '/' . f::name($src) . '.' . $mod . '.js';
+      if(\c::get('cachebuster.querystring.enable')) {
+        $src .= '?v=' . $mod;
+      }
+      else {
+        $src = dirname($src) . '/' . f::name($src) . '.' . $mod . '.js';
+      }
     }
 
     return parent::tag($src, $async);

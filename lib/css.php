@@ -27,8 +27,14 @@ class CSS extends \Kirby\Component\CSS {
       foreach($url as $u) $css[] = $this->tag($u, $media);
       return implode(PHP_EOL, $css) . PHP_EOL;
     }
-
-    $file = kirby()->roots()->index() . DS . $url;
+    
+    if($url == '@auto') {
+      $file = kirby()->site()->page()->template() . '.css';
+      $file = kirby()->roots()->autocss() . DS . $file;
+      $url  = str_replace(kirby()->roots()->index(), "", $file);
+    } else {
+      $file = kirby()->roots()->index() . DS . $url;
+    }
 
     if(file_exists($file)) {
       $mod = f::modified($file);

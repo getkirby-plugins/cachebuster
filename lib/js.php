@@ -28,7 +28,13 @@ class JS extends \Kirby\Component\JS {
       return implode(PHP_EOL, $js) . PHP_EOL;
     }
 
-    $file = kirby()->roots()->index() . DS . $src;
+    if($url == '@auto') {
+      $file = kirby()->site()->page()->template() . '.css';
+      $file = kirby()->roots()->autojs() . DS . $file;
+      $url  = str_replace(kirby()->roots()->index(), "", $file);
+    } else {
+      $file = kirby()->roots()->index() . DS . $src;
+    }
 
     if(file_exists($file)) {
       $mod = f::modified($file);

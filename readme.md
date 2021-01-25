@@ -1,4 +1,4 @@
-# Kirby Cachebuster Plugin
+# Kirby 2 Cachebuster Plugin
 
 This plugin will add modification timestamps to your css and js files, 
 as long as they are embedded with the css() and js() helpers.
